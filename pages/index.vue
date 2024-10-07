@@ -1,3 +1,21 @@
+<script setup>
+const client = useSupabaseClient()
+const products = ref([])
+
+async function getProducts() {
+    const { data, error } = await client
+        .from('product')
+        .select()
+    if(data) {
+        products.value = data
+    }
+}
+
+onMounted(() => {
+    getProducts()
+})
+</script>
+
 <template>
     <div id="carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -18,13 +36,12 @@
                     <div class="card-body">
                         <h2 class="about card-title text-center">About us</h2>
                         <p class="card-text">Selamat datang di DAMARA WANGI PARFUM, di mana keanggunan dan keharuman bertemu dalam setiap tetes parfum yang kami ciptakan. 
-                            kami bangga menjadi pelopor dalam industri parfum dengan misi untuk menghadirkan pengalaman aroma yang tak terlupakan.
+                                            kami bangga menjadi pelopor dalam industri parfum dengan misi untuk menghadirkan pengalaman aroma yang tak terlupakan.
                         </p>
                         <p class="card-text"><small class="text-muted">lebih lanjut</small></p>
                         <!-- contact -->
-                        <NuxtLink to="https://www.instagram.com/damarawangiparfum" target="_blank" class="btn btn-primary ">Open</NuxtLink>
-                        <!-- <NuxtLink to="https://www.instagram.com/damarawangiparfum" target="_blank" class="bg-primary text-light text-center shadow"
-                            style="width: 30%;border-radius: 50px; display: block; text-decoration:none">Open</NuxtLink> -->
+                        <a href="https://www.instagram.com/damarawangiparfum" target="_blank" class="bg-primary text-light text-center shadow"
+                            style="width: 30%;border-radius: 50px; display: block; text-decoration:none">Open</a>
                     </div>
                 </div>
             </div>
@@ -41,40 +58,40 @@
                 </div>
             </div>
             <div class="row d-flex justify-content-around pt-5">
-                <div class="card" style="width: 18rem;">
-                    <img src="~/assets/jaguar.jpeg" class="card-img-top" alt="...">
+                <div v-for="product in products" :key="product.id" class="card" style="width: 18rem;">
+                    <img :src="product.cover" class="card-img-top" :alt="product.nama">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Jaguar</h5>
-                        <p class="card-text">IDR 285.000</p>
-                        <NuxtLink to="https://wa.me/6287749316731" class="btn btn-primary ">Order WhatsApp</NuxtLink>
+                        <h5 class="card-title text-center">{{ product.nama }}</h5>
+                        <p class="card-text">{{ product.harga }}</p>
+                        <a href="#" class="btn btn-primary">Open</a>
                     </div>
                 </div>
-                <div class="card" style="width: 15rem; margin-top: 30px;">
-                    <img src="~/assets/avrill.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">avrill</h5>
-                        <p class="card-text">IDR 285.000</p>
-                        <a to="https://wa.me/6287749316731" class="btn btn-primary ">Order WhatsApp</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img src="~/assets/bulgary.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Jaguar</h5>
-                        <p class="card-text">IDR 285.000</p>
-                        <NuxtLink to="https://wa.me/6287749316731" class="btn btn-primary ">Order WhatsApp</NuxtLink>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
 
 
     <!-- n -->
+    <!-- footer -->
+    <div class="card mt-5 shadow">
+        <div class="card-body">
+            <div class="image d-flex justify-content-center">
+                <img src="~/assets/logo.png" style="width:150px;" alt="logo">
+            </div>
+            
+            <div class="pt-3 d-flex justify-content-center">
+                <p>Jl.ciwasmandi</p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p>&copy Rumah Parfum Damara</p>
+            </div>
+        </div>
+    </div>
     <!-- contact wa -->
-    <NuxtLink to="https://wa.me/6289505898529" class="wa-button fixed-bottom" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="wa-icon">
-        Hubungi Admin
+    <NuxtLink href="https://wa.me/6289505898529" class="wa-button fixed-bottom" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="wa-icon">
+            Hubungi Admin
     </NuxtLink>
     <!-- footer -->
 </template>
