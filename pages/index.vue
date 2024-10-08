@@ -43,14 +43,7 @@ onMounted(() => {
                         <a href="https://www.instagram.com/damarawangiparfum" target="_blank" class="bg-primary text-light text-center shadow"
                             style="width: 30%;border-radius: 50px; display: block; text-decoration:none">Open</a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- about n  -->
-
-    <!-- product -->
-    <section id="product">
+                </div><section id="product">
         <div class="container">
             <div class="row text-center">
                 <div class="col pt-5">
@@ -58,23 +51,31 @@ onMounted(() => {
                 </div>
             </div>
             <div class="row d-flex justify-content-around pt-5">
-                <div v-for="product in products" :key="product.id" class="card" style="width: 18rem;">
+                <div v-for="product in products" :key="product.id" class="card mt-5" style="width: 18rem;">
                     <img :src="product.cover" class="card-img-top" :alt="product.nama">
                     <div class="card-body">
                         <h5 class="card-title text-center">{{ product.nama }}</h5>
                         <p class="card-text">{{ product.harga }}</p>
-                        <a href="#" class="btn btn-primary">Open</a>
+                        <NuxtLink :to="`/${product.id}`" class="btn btn-primary">Open</NuxtLink>
                     </div>
                 </div>
                 
             </div>
         </div>
     </section>
+            </div>
+        </div>
+    </section>
+    <!-- about n  -->
+
+    <!-- product -->
+    
 
 
     <!-- n -->
     <!-- footer -->
-    <div class="card mt-5 shadow">
+     <Footer />
+    <!-- <div class="card mt-5 shadow">
         <div class="card-body">
             <div class="image d-flex justify-content-center">
                 <img src="~/assets/logo.png" style="width:150px;" alt="logo">
@@ -84,12 +85,12 @@ onMounted(() => {
                 <p>Jl.ciwasmandi</p>
             </div>
             <div class="d-flex justify-content-center">
-                <p>&copy Rumah Parfum Damara</p>
+                <p> &copy; Rumah Parfum Damara</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- contact wa -->
-    <NuxtLink href="https://wa.me/6289505898529" class="wa-button fixed-bottom" target="_blank">
+    <NuxtLink to="https://wa.me/6289505898529" class="wa-button fixed-bottom" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="wa-icon">
             Hubungi Admin
     </NuxtLink>
